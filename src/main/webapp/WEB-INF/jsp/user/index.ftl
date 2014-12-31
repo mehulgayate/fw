@@ -32,28 +32,37 @@ Released   : 20140101
 		<div id="menu">
 			<ul>
 				<li class="active"><a href="#" accesskey="1" title="">Post Something</a></li>
+				<li><a href="#" accesskey="1" title="">View Posts </a></li>
 				
 			</ul>
 		</div>
 	</div>
 	<div id="banner" class="container">
 		<div>
-			<form action="/post" method="post">
-				<div style="display: table; width: 500px; background: white; margin: 0 auto; padding: 30px;">
-					<div style="display: table-row;">
-						<div style="display: table-cell;">
+			<form action="/new-post" method="post">
+				<div style="display:block; width: 500px; background: white; margin: 0 auto; padding: 30px; opacity: 0.6;">
+					<div style="display: block;">
+						<div style="display: inline-block; width: 100px;">
 							<strong>Write Post :</strong>
 						</div>
-						<div style="display: table-cell;">
-							<textarea rows="10" cols="35" name="content"></textarea>
+						<div style="display: inline-block;">
+							<textarea rows="10" cols="35" name="content" style="color: red; font-size: 16px;"></textarea>
 						</div>
 					</div>
-					<div style="display: table-row;">
-						<div style="display: table-cell;">
+					<div style="padding-top: 10px;">
+						<div style="display: inline-block; width: 100px;">
 							<strong>Tag Users :</strong>
 						</div>
-						<div style="display: table-cell;">
-							<input type="text" name="tags"/>
+						<div style="display: inline-block;">
+							<input type="text" name="tags" style="width: 360px;font-size: 16px; color: red;" placeholder="type user names seperated by commas"/>
+						</div>
+					</div>
+					<div style=" padding-top: 10px; ">
+						<div style="display: inline-block; width: 100px;">
+							<strong></strong>
+						</div>
+						<div style="display: inline-block;">
+							<input type="submit" value="Post"/>
 						</div>
 					</div>
 				</div>
