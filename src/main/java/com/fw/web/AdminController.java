@@ -39,12 +39,11 @@ public class AdminController {
 		ModelAndView mv=new ModelAndView("admin/add-new-movie");
 		
 		return mv;
-	}
+	}	
 	
-	
-	@RequestMapping("/")
-	public ModelAndView showSerach(){
-		return new ModelAndView("index");
+	@RequestMapping("/admin/mailbox")
+	public ModelAndView showMailbox(){
+		return new ModelAndView("admin/mailbox");
 	}
 	
 	@RequestMapping("/admin/upload-movies")

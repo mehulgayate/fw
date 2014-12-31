@@ -25,7 +25,7 @@ public class UserController {
 	
 	@RequestMapping("/login")
 	public ModelAndView showLogin(){
-		return new ModelAndView("login");
+		return new ModelAndView("login/login");
 	}
 	
 	@RequestMapping("/authenticate")
@@ -40,9 +40,14 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping("/register")
+	@RequestMapping("/signup")
 	public ModelAndView showRegister(){
-		return new ModelAndView("register");
+		return new ModelAndView("login/signup");
+	}
+	
+	@RequestMapping("/signup-complete")
+	public ModelAndView signupComplete(){
+		return new ModelAndView("login/signup-complete");
 	}
 	
 	@RequestMapping("/add-user")
@@ -57,11 +62,11 @@ public class UserController {
 		return new ModelAndView("redirect:/login");
 	}
 	
-	@RequestMapping("/home")
+	@RequestMapping("/")
 	public ModelAndView showHome(HttpServletRequest request){
 		
 		
-		return new ModelAndView("home");
+		return new ModelAndView("user/index");
 	}
 	
 }
