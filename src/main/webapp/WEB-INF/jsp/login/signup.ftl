@@ -105,7 +105,7 @@ body{
 	margin-top: 10px;
 }
 
-.login input[type=button]{
+.login input[type=submit]{
 	width: 260px;
 	height: 35px;
 	background: #fff;
@@ -120,11 +120,11 @@ body{
 	margin-top: 10px;
 }
 
-.login input[type=button]:hover{
+.login input[type=submit]:hover{
 	opacity: 0.8;
 }
 
-.login input[type=button]:active{
+.login input[type=submit]:active{
 	opacity: 0.6;
 }
 
@@ -138,7 +138,7 @@ body{
 	border: 1px solid rgba(255,255,255,0.9);
 }
 
-.login input[type=button]:focus{
+.login input[type=submit]:focus{
 	outline: none;
 }
 
@@ -163,15 +163,17 @@ body{
 			<div>Filtered<span>Wall</span></div>
 		</div>
 		<br>
-		<div class="login">
-				<input type="text" placeholder="Name" name="name"><br>
-				<input type="text" placeholder="Email" name="email"><br>
-				<input type="password" placeholder="Password" name="password"><br>
-				<input type="text" placeholder="Address" name="address"><br>
-				<input type="text" placeholder="Phone" name="phone"><br>
-				<input type="button" value="SignUp"><br>
-				
-		</div>
+		<form action="/add-user" method="post">
+			<div class="login">
+					<input type="text" placeholder="Name" name="name"><br>
+					<input type="text" placeholder="Email" name="email"><br>
+					<input type="password" placeholder="Password" name="password"><br>
+					<input type="text" placeholder="Address" name="address"><br>
+					<input type="text" placeholder="Phone" name="phone"><br>
+					<input type="submit" value="SignUp"><br>
+					
+			</div>
+		</form>
 
   <script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script>
 

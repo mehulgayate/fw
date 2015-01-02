@@ -2,6 +2,7 @@ package com.fw.web;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,12 +30,14 @@ public class UserController {
 	}
 	
 	@RequestMapping("/authenticate")
-	public ModelAndView authenticate(@RequestParam String email, @RequestParam String password){
+	public ModelAndView authenticate(@RequestParam String email, @RequestParam String password, HttpSession session){
 		
 		User user=repository.findUserByEmail(email);
 		
 		if(user!=null && user.getPassword().equals(password)){
-			return new ModelAndView("redirect:/home");			
+			session.setAttribute("user", user);
+			return new ModelAndView("redirect:/");		
+			
 		}else{
 			return new ModelAndView("loging-failure");
 		}
@@ -63,9 +66,12 @@ public class UserController {
 	}
 	
 	@RequestMapping("/")
-	public ModelAndView showHome(HttpServletRequest request){
+	public ModelAndView showHome(HttpServletRequest request, HttpSession session){
 		
-		
+		User user=(User) session.getAttribute("user");
+		if(user==null){
+			return new ModelAndView("redirect:/login");
+		}
 		return new ModelAndView("user/index");
 	}
 	

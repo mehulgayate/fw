@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fw.entity.GraphData;
+import com.fw.entity.Post;
 import com.fw.entity.User;
 
 @Transactional
@@ -28,6 +29,7 @@ public class Repository {
 	
 	public User findUserByEmail(String email){
 		return (User) getSession().createQuery("FROM "+User.class.getName()+" where email=:email")
+				.setParameter("email", email)
 				.uniqueResult();
 	}
 	
@@ -35,5 +37,11 @@ public class Repository {
 	public List<GraphData> listGraphData(){
 		return getSession().createQuery("FROM "+GraphData.class.getName())
 				.list();
-	}	
+	}
+	
+	public List<Post> listPostsByUser(User user){
+		return getSession().createQuery("FROM "+Post.class.getName()+" p where p.user=:user")
+				.setParameter("user", user)
+				.list();
+	}
 }

@@ -31,42 +31,28 @@ Released   : 20140101
 		</div>
 		<div id="menu">
 			<ul>
-				<li class="active"><a href="#" accesskey="1" title="">Post Something</a></li>
-				<li><a href="/posts" accesskey="1" title="">View Posts </a></li>
+				<li><a href="/" accesskey="1" title="">Post Something</a></li>
+				<li class="active"><a href="#" accesskey="1" title="">View Posts </a></li>
 				
 			</ul>
 		</div>
 	</div>
 	<div id="banner" class="container">
 		<div>
-			<form action="/new-post" method="post">
-				<div style="display:block; width: 500px; background: white; margin: 0 auto; padding: 30px; opacity: 0.6;">
-					<div style="display: block;">
-						<div style="display: inline-block; width: 100px;">
-							<strong>Write Post :</strong>
-						</div>
-						<div style="display: inline-block;">
-							<textarea rows="10" cols="35" name="postText" style="color: red; font-size: 16px;"></textarea>
-						</div>
-					</div>
-					<div style="padding-top: 10px;">
-						<div style="display: inline-block; width: 100px;">
-							<strong>Tag Users :</strong>
-						</div>
-						<div style="display: inline-block;">
-							<input type="text" name="tags" style="width: 360px;font-size: 16px; color: red;" placeholder="type user names seperated by commas"/>
-						</div>
-					</div>
-					<div style=" padding-top: 10px; ">
-						<div style="display: inline-block; width: 100px;">
-							<strong></strong>
-						</div>
-						<div style="display: inline-block;">
-							<input type="submit" value="Post"/>
-						</div>
-					</div>
+			<#if posts?has_content && posts?size !=0>
+			<#list posts as post>			
+			<div style="display:block; width: 500px; background: white; margin: 0 auto; padding: 30px; opacity: 0.6; margin-bottom: 15px;">
+				<div style="display: inline-block; width: 390px;">
+					${post.postText?if_exists}
 				</div>
-			</form>
+				<div style="display: inline-block; width: 100px; border-left: 2px solid; padding-left	: 2px;">
+					${post.status?if_exists}
+				</div>									
+			</div>
+			</#list>	
+			<#else>
+				<strong style="color: white;">No Posts</strong>
+			</#if>		
 		</div>
 	</div>
 </div>
