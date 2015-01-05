@@ -222,7 +222,7 @@
                             <div class="small-box bg-aqua">
                                 <div class="inner">
                                     <h3>
-                                        ${blockedUsers?size}
+                                        ${users?size}
                                     </h3>
                                     <p>
                                         Blocked Users
@@ -260,7 +260,7 @@
                             <div class="small-box bg-yellow">
                                 <div class="inner">
                                     <h3>
-                                       ${latestUsers?size}
+                                        ${latestUsers?size}
                                     </h3>
                                     <p>
                                         User Registrations

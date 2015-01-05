@@ -77,5 +77,20 @@
 	<bean id="repository"
 		class="com.fw.entity.support.Repository">
 		<property name="sessionFactory" ref="sessionFactory" />		
-	</bean>	
+	</bean>
+	<bean id="postConfiguration"
+		class="com.fw.web.support.PostConfiguration" init-method="init">
+			<property name="bannedWordsString">
+        		<value>${app.bannedWords}</value>
+    		</property>
+    		<property name="bannedWordsAllowed">
+        		<value>${app.bannedWordsAllowed}</value>
+    		</property>
+	</bean>
+	<bean id="postService"
+		class="com.fw.web.support.PostService">
+		<property name="repository" ref="repository" />
+		<property name="dataStoreManager" ref="dataStoreManager" />
+		<property name="postConfiguration" ref="postConfiguration" />		
+	</bean>		
 </beans>

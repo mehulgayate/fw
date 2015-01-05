@@ -1,5 +1,6 @@
 package com.fw.entity.support;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fw.entity.GraphData;
 import com.fw.entity.Post;
 import com.fw.entity.User;
+import com.fw.entity.User.Status;
 
 @Transactional
 public class Repository {
@@ -28,9 +30,33 @@ public class Repository {
 	
 	
 	public User findUserByEmail(String email){
-		return (User) getSession().createQuery("FROM "+User.class.getName()+" where email=:email")
+		return (User) getSession().createQuery("FROM "+User.class.getName()+" where email=:email AND status!=:status")
 				.setParameter("email", email)
+				.setParameter("status", Status.DELETED)
 				.uniqueResult();
+	}
+	
+	public User findUserById(Long id){
+		return (User) getSession().createQuery("FROM "+User.class.getName()+" where id=:id")
+				.setParameter("id", id)
+				.uniqueResult();
+	}
+	
+	public List<User> listUsers(){
+		return  getSession().createQuery("FROM "+User.class.getName())				
+				.list();
+	}
+	
+	public List<User> listLatestUsers(){
+		return  getSession().createQuery("FROM "+User.class.getName()+" where date > :date")
+				.setParameter("date", new Date((new Date().getTime()-(1000*60*60*24*7))))
+				.list();
+	}
+	
+	public List<User> listBlockedUsers(){
+		return  getSession().createQuery("FROM "+User.class.getName()+" where status=:status")
+				.setParameter("status", Status.BLACK_LISTED)
+				.list();
 	}
 	
 	

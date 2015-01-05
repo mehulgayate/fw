@@ -260,7 +260,7 @@
                             <div class="small-box bg-yellow">
                                 <div class="inner">
                                     <h3>
-                                       ${latestUsers?size}
+                                        ${users?size}
                                     </h3>
                                     <p>
                                         User Registrations
@@ -269,7 +269,7 @@
                                 <div class="icon">
                                     <i class="ion ion-person-add"></i>
                                 </div>
-                                <a href="/admin/latest-users-list" class="small-box-footer">
+                                <a href="#" class="small-box-footer">
                                     More info <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
