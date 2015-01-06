@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Admin | Dashboard</title>
+        <title>AdminLTE | Morris.js Charts</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- bootstrap 3.0.2 -->
         <link href="/static/admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -10,16 +10,8 @@
         <link href="/static/admin/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <!-- Ionicons -->
         <link href="/static/admin/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-        <!-- Morris chart -->
+        <!-- Morris charts -->
         <link href="/static/admin/css/morris/morris.css" rel="stylesheet" type="text/css" />
-        <!-- jvectormap -->
-        <link href="/static/admin/css/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-        <!-- fullCalendar -->
-        <link href="/static/admin/css/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css" />
-        <!-- Daterange picker -->
-        <link href="/static/admin/css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
-        <!-- bootstrap wysihtml5 - text editor -->
-        <link href="/static/admin/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
         <link href="/static/admin/css/AdminLTE.css" rel="stylesheet" type="text/css" />
 
@@ -27,7 +19,7 @@
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-          <script src="https://oss.maxcdn.com/libs/respond./static/admin/js/1.3.0/respond.min.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
     </head>
     <body class="skin-blue">
@@ -139,7 +131,7 @@
                                     
                                 </li>
                                 <!-- Menu Footer-->
-                                <li class="user-footer">
+                                <li class="user-footer">                                   
                                     <div class="pull-right">
                                         <a href="/admin/logout" class="btn btn-default btn-flat">Sign out</a>
                                     </div>
@@ -181,10 +173,10 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="/admin/charts/blocked"><i class="fa fa-angle-double-right"></i>Filter Words</a></li>
-                                <li><a href="/admin/charts/blacklists"><i class="fa fa-angle-double-right"></i>Blacklist</a></li>                                
+                                <li><a href="/admin/grapth-data-words"><i class="fa fa-angle-double-right"></i>Filter Words</a></li>
+                                <li><a href="/admin/grapth-data-black-list"><i class="fa fa-angle-double-right"></i>Blacklist</a></li>                                
                             </ul>
-                        </li>                                             
+                        </li>                                               
                     </ul>
                 </section>
                 <!-- /.sidebar -->
@@ -195,174 +187,99 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Dashboard
-                        <small>Control panel</small>
-                    </h1>
-                    <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li class="active">Dashboard</li>
-                    </ol>
+                        Day vs Posts Blocked
+                        <small>Preview</small>
+                    </h1>                   
                 </section>
 
                 <!-- Main content -->
                 <section class="content">
 
-                    <!-- Small boxes (Stat box) -->
                     <div class="row">
-                        <div class="col-lg-3 col-xs-6">
-                            <!-- small box -->
-                            <div class="small-box bg-aqua">
-                                <div class="inner">
-                                    <h3>
-                                        ${users?size}
-                                    </h3>
-                                    <p>
-                                        Blocked Users
-                                    </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-bag"></i>
-                                </div>
-                                <a href="/admin/black-listed-users-list" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
-                        </div><!-- ./col -->
-                        <div class="col-lg-3 col-xs-6">
-                            <!-- small box -->
-                            <div class="small-box bg-green">
-                                <div class="inner">
-                                    <h3>
-                                        How much<sup style="font-size: 20px">%</sup>
-                                    </h3>
-                                    <p>
-                                        Block Rate
-                                    </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-stats-bars"></i>
-                                </div>
-                                <a href="/admin/grapth-data-black-list" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
-                        </div><!-- ./col -->
-                        <div class="col-lg-3 col-xs-6">
-                            <!-- small box -->
-                            <div class="small-box bg-yellow">
-                                <div class="inner">
-                                    <h3>
-                                        ${latestUsers?size}
-                                    </h3>
-                                    <p>
-                                        User Registrations
-                                    </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-person-add"></i>
-                                </div>
-                                <a href="/admin/latest-users-list" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
-                        </div><!-- ./col -->
-                        <div class="col-lg-3 col-xs-6">
-                            <!-- small box -->
-                            
-                        </div><!-- ./col -->
-                    </div><!-- /.row -->
-
-                    <!-- top row -->
-                    <div class="row">
-                        <div class="col-xs-12 connectedSortable">
-                            
-                        </div><!-- /.col -->
-                    </div>
-                    <!-- /.row -->
-
-                    <!-- Main row -->
-                    <div class="row">
-                        <!-- Left col -->
-                        <section class="col-lg-6 connectedSortable">                       
-                            <div class="box box-primary">
+                        <div class="col-md-6" style="width: 1000px;">
+                        	
+                            <!-- LINE CHART -->
+                            <div class="box box-info">
                                 <div class="box-header">
-                                    <i class="ion ion-clipboard"></i>
-                                    <h3 class="box-title">User Black List</h3>
-                                    <div class="box-tools pull-right">                                        
-                                    </div>
-                                </div><!-- /.box-header -->
-                                <div class="box-body">
-                                    <ul class="todo-list">
-                                      <#list users as user>
-                                        <li>
-                                            <!-- drag handle -->
-                                            <span class="handle">
-                                                <i class="fa fa-ellipsis-v"></i>
-                                                <i class="fa fa-ellipsis-v"></i>
-                                            </span>                                                                                   
-                                            <!-- todo text -->
-                                            <span class="text">${user.id}</span>
-                                            <span class="text" style="margin-left: 40px;">${user.name}</span>
-                                            <span class="text" style="margin-left: 40px;">${user.status}</span>                                            
-                                            <!-- General tools such as edit or delete-->
-                                            <div class="tools">
-                                                <#if user.status!="ACTIVE"><a href="/admin/activate-user?id=${user.id}"><i class="fa fa-edit"></i></a></#if>
-                                                <a href="/admin/delete-user?id=${user.id}"><i class="fa fa-trash-o"></i></a>
-                                            </div>
-                                        </li>     
-                                        </#list>                                  
-                                    </ul>
+                                    <h3 class="box-title">Line Chart</h3>
+                                </div>
+                                <div class="box-body chart-responsive">
+                                    <div class="chart" id="chart_div"></div>
                                 </div><!-- /.box-body -->
-                                
-                            </div><!-- /.box -->
-                                                  
-
-                        </section><!-- /.Left col -->
-                        <!-- right col (We are only adding the ID to make the widgets sortable)-->
-                        <section class="col-lg-6 connectedSortable">
-                            <!-- TO DO List -->
+                            </div><!-- /.box -->                         
                             
-
-                        </section><!-- right col -->
-                    </div><!-- /.row (main row) -->
+                        </div><!-- /.col (LEFT) -->                        
+                    </div><!-- /.row -->
 
                 </section><!-- /.content -->
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
 
-        <!-- add new calendar event modal -->
-
 
         <!-- jQuery 2.0.2 -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-        <!-- jQuery UI 1.10.3 -->
-        <script src="/static/admin/js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
         <!-- Bootstrap -->
         <script src="/static/admin/js/bootstrap.min.js" type="text/javascript"></script>
+
         <!-- Morris.js charts -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
         <script src="/static/admin/js/plugins/morris/morris.min.js" type="text/javascript"></script>
-        <!-- Sparkline -->
-        <script src="/static/admin/js/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
-        <!-- jvectormap -->
-        <script src="/static/admin/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
-        <script src="/static/admin/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
-        <!-- fullCalendar -->
-        <script src="/static/admin/js/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
-        <!-- jQuery Knob Chart -->
-        <script src="/static/admin/js/plugins/jqueryKnob/jquery.knob.js" type="text/javascript"></script>
-        <!-- daterangepicker -->
-        <script src="/static/admin/js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-        <!-- Bootstrap WYSIHTML5 -->
-        <script src="/static/admin/js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
-        <!-- iCheck -->
-        <script src="/static/admin/js/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
 
         <!-- AdminLTE App -->
         <script src="/static/admin/js/AdminLTE/app.js" type="text/javascript"></script>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+        <!-- page script -->
+        <script type="text/javascript">
+        google.load("visualization", "1", {packages:["corechart"]});
         
-        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-        <script src="/static/admin/js/AdminLTE/dashboard.js" type="text/javascript"></script>        
+        var dataArray=[];
+        
+        $(function() {
+        	
+        	var dataArray=[];
+     		var headerArray=[];
+     		headerArray.push("Day");
+     		headerArray.push("Posts Blocked");     		
+     		dataArray.push(headerArray);	
+        	
+        	
+        	
+        	$.ajax({		
+     			type : "GET",
+     			url : "/admin/grapth-data-black-list.json",         			
+     			dataType:"json",
+     			success : function(data) {    				 
+    				
+     				
+     				$.each(data,function(key,value){
+     					var innerArray=[];    	
+     					innerArray.push(value.time);    					
+     					innerArray.push(parseInt(value.count));
+     					
+     					dataArray.push(innerArray);
+     				});     				
+     				var data = google.visualization.arrayToDataTable(dataArray);
+     	        	
+     	        	var options = {
+     			    			'width':900,'height':500,'vAxis': {'title': 'Posts Blocked'},hAxis: {
+     			    		        slantedText:true,
+     			    		        slantedTextAngle:90,// here you can even use 180
+     			    		        'title': 'Day'
+     			    		    },title: "Posts Blocked Analysis"
+     			    	};
+     	        	
+     	        	var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+     			        chart.draw(data, options);
+     				
+     			}
+        	
+        	
+        	
+        	});
+        });       
+            
+        </script>
 
     </body>
 </html>

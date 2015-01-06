@@ -9,38 +9,42 @@ import javax.persistence.Entity;
 import net.sf.json.JSONObject;
 
 import com.evalua.entity.support.EntityBase;
+import com.fw.web.support.DateTimeUtil;
 
 @Entity
 public class GraphData extends EntityBase{	
 
-	private Long pkaTime;
-	private Long normalTime;
-	private Date date;	
+	public enum GraphType{
+		WORDS, BLACK_LIST;
+	}
+	
+	private Integer count=0;
+	private Date date;
+	private GraphType graphType=GraphType.WORDS;
 	
 	public Date getDate() {
 		return date;
 	}
 	public void setDate(Date date) {
 		this.date = date;
-	}
-	public Long getPkaTime() {
-		return pkaTime;
-	}
-	public void setPkaTime(Long pkaTime) {
-		this.pkaTime = pkaTime;
-	}
-	public Long getNormalTime() {
-		return normalTime;
-	}
-	public void setNormalTime(Long normalTime) {
-		this.normalTime = normalTime;
-	}
+	}	
 	
+	public Integer getCount() {
+		return count;
+	}
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+	public GraphType getGraphType() {
+		return graphType;
+	}
+	public void setGraphType(GraphType graphType) {
+		this.graphType = graphType;
+	}
 	public JSONObject toJSON(){
 		JSONObject jsonObject =new JSONObject();
-		jsonObject.put("time", this.date.toString());
-		jsonObject.put("pkaTime", this.pkaTime);
-		jsonObject.put("normalTime", this.normalTime);
+		jsonObject.put("time", DateTimeUtil.formatDate(this.date,"dd-MM"));
+		jsonObject.put("count", this.count);
 		return jsonObject;
 	}
 	

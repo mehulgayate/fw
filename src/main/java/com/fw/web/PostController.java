@@ -1,5 +1,6 @@
 package com.fw.web;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.evalua.entity.support.DataStoreManager;
+import com.fw.entity.GraphData;
 import com.fw.entity.Post;
+import com.fw.entity.GraphData.GraphType;
 import com.fw.entity.Post.Status;
 import com.fw.entity.User;
 import com.fw.entity.support.Repository;
@@ -76,7 +79,15 @@ public class PostController {
 		if(post.getStatus().equals(Status.BANNED)){
 			user.setBannedWordsCount(user.getBannedWordsCount()+1);
 			if(user.getBannedWordsCount()>postConfiguration.getBannedWordsAllowed()){
-				user.setStatus(com.fw.entity.User.Status.BLACK_LISTED);				
+				user.setStatus(com.fw.entity.User.Status.BLACK_LISTED);			
+				GraphData graphData=repository.findGraphData(new Date(), GraphType.BLACK_LIST);
+				if(graphData==null){
+					graphData =new GraphData();
+					graphData.setDate(new Date());
+					graphData.setGraphType(GraphType.BLACK_LIST);
+				}				
+				graphData.setCount(graphData.getCount()+1);
+				dataStoreManager.save(graphData);
 			}
 			dataStoreManager.save(user);
 		}

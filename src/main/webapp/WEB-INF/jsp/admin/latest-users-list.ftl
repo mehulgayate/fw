@@ -140,11 +140,8 @@
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                    </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                        <a href="/admin/logout" class="btn btn-default btn-flat">Sign out</a>
                                     </div>
                                 </li>
                             </ul>
@@ -184,15 +181,10 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="/admin/charts/blocked"><i class="fa fa-angle-double-right"></i>Filter Words</a></li>
-                                <li><a href="/admin/charts/blacklists"><i class="fa fa-angle-double-right"></i>Blacklist</a></li>                                
+                                <li><a href="/admin/grapth-data-words"><i class="fa fa-angle-double-right"></i>Filter Words</a></li>
+                                <li><a href="/admin/grapth-data-black-list"><i class="fa fa-angle-double-right"></i>Blacklist</a></li>                                
                             </ul>
-                        </li>                        
-                        <li>
-                            <a href="/admin/mailbox">
-                                <i class="fa fa-envelope"></i> <span>Mailbox</span>                                
-                            </a>
-                        </li>                        
+                        </li>                                             
                     </ul>
                 </section>
                 <!-- /.sidebar -->
@@ -241,16 +233,16 @@
                             <div class="small-box bg-green">
                                 <div class="inner">
                                     <h3>
-                                        53<sup style="font-size: 20px">%</sup>
+                                        How much<sup style="font-size: 20px">%</sup>
                                     </h3>
                                     <p>
-                                        Bounce Rate
+                                        Block Rate
                                     </p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">
+                                <a href="/admin/grapth-data-black-list" class="small-box-footer">
                                     More info <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -276,22 +268,7 @@
                         </div><!-- ./col -->
                         <div class="col-lg-3 col-xs-6">
                             <!-- small box -->
-                            <div class="small-box bg-red">
-                                <div class="inner">
-                                    <h3>
-                                        65
-                                    </h3>
-                                    <p>
-                                        Unique Visitors
-                                    </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-pie-graph"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
+                            
                         </div><!-- ./col -->
                     </div><!-- /.row -->
 
@@ -310,7 +287,7 @@
                             <div class="box box-primary">
                                 <div class="box-header">
                                     <i class="ion ion-clipboard"></i>
-                                    <h3 class="box-title">User List</h3>
+                                    <h3 class="box-title">New Registrations</h3>
                                     <div class="box-tools pull-right">                                        
                                     </div>
                                 </div><!-- /.box-header -->
@@ -329,16 +306,14 @@
                                             <span class="text" style="margin-left: 40px;">${user.status}</span>                                            
                                             <!-- General tools such as edit or delete-->
                                             <div class="tools">
-                                                <i class="fa fa-edit"></i>
-                                                <i class="fa fa-trash-o"></i>
+                                                <#if user.status!="ACTIVE"><a href="/admin/activate-user?id=${user.id}"><i class="fa fa-edit"></i></a></#if>
+                                                <a href="/admin/delete-user?id=${user.id}"><i class="fa fa-trash-o"></i></a>
                                             </div>
                                         </li>     
                                         </#list>                                  
                                     </ul>
                                 </div><!-- /.box-body -->
-                                <div class="box-footer clearfix no-border">
-                                    <button class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button>
-                                </div>
+                                
                             </div><!-- /.box -->
                                                   
 
