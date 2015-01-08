@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <!--
 Design by TEMPLATED
 http://templated.co
@@ -33,6 +33,7 @@ Released   : 20140101
 			<ul>
 				<li><a href="/" accesskey="1" title="">Post Something</a></li>
 				<li class="active"><a href="#" accesskey="1" title="">View Posts </a></li>
+				<li><a href="/logout" accesskey="1" title="">Logout </a></li>
 				
 			</ul>
 		</div>
@@ -41,13 +42,41 @@ Released   : 20140101
 		<div>
 			<#if posts?has_content && posts?size !=0>
 			<#list posts as post>			
-			<div style="display:block; width: 500px; background: white; margin: 0 auto; padding: 30px; opacity: 0.6; margin-bottom: 15px;">
-				<div style="display: inline-block; width: 390px;">
+			<div style="display:block; width: 900px; background: white; margin: 0 auto; padding: 30px; opacity: 0.6; margin-bottom: 15px;">
+				<div style="display: inline-block; width: 300px;">
 					${post.postText?if_exists}
 				</div>
 				<div style="display: inline-block; width: 100px; border-left: 2px solid; padding-left	: 2px;">
 					${post.status?if_exists}
-				</div>									
+				</div>
+				<#if post.taggedBy?has_content>
+				<div style="display: inline-block; width: 250px; border-left: 2px solid; padding-left	: 2px;">
+					Tagged By : ${post.taggedBy.name?if_exists}
+				</div>
+				</#if>
+				<#if post.status=="NOT_VERIFIED">
+					<div style="display: inline-block; width: 180px; border-left: 2px solid; padding-left	: 2px;">
+						<a href="/verify-post?id=${post.id}">Verify</a>
+						<a href="/remove-post?id=${post.id}" style="padding-left: 20px;">Remove</a>
+					</div>
+				</#if>
+				
+				<#if post.fileAttachment?has_content>
+				<br/>
+				<br/>
+					<#if post.fileAttachment.fileType=="IMAGE">
+						<img src="/file-view?id=${post.fileAttachment.id}" style="max-width: 500px"/>
+					</#if>
+					<#if post.fileAttachment.fileType=="VIDEO">
+						<video style="max-width: 500px" controls>
+						<source src="/file-view?id=${post.fileAttachment.id}" type="video/mp4">
+						</video>
+					</#if>
+					<#if post.fileAttachment.fileType=="OTHER">
+						<a href="/file-view?id=${post.fileAttachment.id}">Download File</a>
+					</#if>				
+				
+				</#if>									
 			</div>
 			</#list>	
 			<#else>

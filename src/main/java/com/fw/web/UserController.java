@@ -1,9 +1,13 @@
 package com.fw.web;
 
+import java.io.IOException;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.evalua.entity.support.DataStoreManager;
+import com.fw.entity.FileAttachment;
 import com.fw.entity.User;
 import com.fw.entity.support.Repository;
 
@@ -39,7 +44,7 @@ public class UserController {
 			return new ModelAndView("redirect:/");		
 			
 		}else{
-			return new ModelAndView("loging-failure");
+			return new ModelAndView("login/loging-failure");
 		}
 	}
 	
@@ -51,6 +56,25 @@ public class UserController {
 	@RequestMapping("/signup-complete")
 	public ModelAndView signupComplete(){
 		return new ModelAndView("login/signup-complete");
+	}
+	
+	@RequestMapping("/edit-user")
+	public ModelAndView editUser(){
+		return new ModelAndView("user/edit-user");
+	}
+	
+	@RequestMapping("/save-user")
+	public ModelAndView saveUser(@ModelAttribute User user, HttpSession session){
+		
+		User existingUser= repository.findUserByEmail(user.getEmail());
+		
+		String[] ignoreProperties = {"id", "email", "password"};
+		
+		BeanUtils.copyProperties(user, existingUser, ignoreProperties);
+		dataStoreManager.save(existingUser);
+		
+		session.setAttribute("user", existingUser);
+		return new ModelAndView("redirect:/posts");
 	}
 	
 	@RequestMapping("/add-user")
@@ -73,6 +97,19 @@ public class UserController {
 			return new ModelAndView("redirect:/login");
 		}
 		return new ModelAndView("user/index");
+	}
+	
+	@RequestMapping("/file-view")
+	public String viewFile(@RequestParam Long id, HttpServletResponse response) throws IOException{
+		FileAttachment fileAttachment= repository.findFileAttachmentById(id);
+		
+		response.setContentType(fileAttachment.getMimeType());
+        response.setHeader("Content-disposition", "inline; filename="+ fileAttachment.getName());
+        fileAttachment.writeAttachmentTo(response.getOutputStream());
+        response.getOutputStream().close();
+        
+        return null;
+		
 	}
 	
 }

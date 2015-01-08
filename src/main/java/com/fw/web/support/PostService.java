@@ -1,11 +1,14 @@
 package com.fw.web.support;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.BeanUtils;
 
 import com.evalua.entity.support.DataStoreManager;
 import com.fw.entity.GraphData;
+import com.fw.entity.User;
 import com.fw.entity.GraphData.GraphType;
 import com.fw.entity.Post;
 import com.fw.entity.Post.Status;
@@ -72,8 +75,7 @@ public class PostService {
 			dataStoreManager.save(graphData);
 			
 			return Status.BANNED;
-		}
-		
+		}		
 		
 		return Status.VALID;
 	}

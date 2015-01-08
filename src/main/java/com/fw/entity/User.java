@@ -13,6 +13,10 @@ public class User extends EntityBase{
 		ACTIVE, BLACK_LISTED,DELETED;
 	}
 	
+	public enum PrivacyStatus{
+		ALLOW, BAN;
+	}
+	
 	private String name;
 	private String email;
 	private String password;
@@ -21,7 +25,17 @@ public class User extends EntityBase{
 	private Integer bannedWordsCount=0;
 	private Status status=Status.ACTIVE;
 	private Date date=new Date();
+	private PrivacyStatus validationStatus=PrivacyStatus.BAN;
 	
+	
+	
+	
+	public PrivacyStatus getValidationStatus() {
+		return validationStatus;
+	}
+	public void setValidationStatus(PrivacyStatus validationStatus) {
+		this.validationStatus = validationStatus;
+	}
 	public String getName() {
 		return name;
 	}

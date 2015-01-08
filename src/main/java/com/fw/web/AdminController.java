@@ -41,6 +41,7 @@ public class AdminController {
 		mv.addObject("users",repository.listUsers());
 		mv.addObject("blockedUsers",repository.listBlockedUsers());
 		mv.addObject("latestUsers",repository.listLatestUsers());
+		mv.addObject("posts",repository.listPostsForAdmin());
 		return mv;
 	}
 
@@ -50,6 +51,7 @@ public class AdminController {
 
 		mv.addObject("users",repository.listBlockedUsers());
 		mv.addObject("latestUsers",repository.listLatestUsers());
+		mv.addObject("posts",repository.listPostsForAdmin());
 		return mv;
 	}
 
@@ -58,6 +60,16 @@ public class AdminController {
 		ModelAndView mv=new ModelAndView("admin/latest-users-list");
 		mv.addObject("users",repository.listLatestUsers());
 		mv.addObject("blockedUsers",repository.listBlockedUsers());
+		mv.addObject("posts",repository.listPostsForAdmin());
+		return mv;
+	}
+	
+	@RequestMapping("/admin/verify-posts-list")
+	public ModelAndView verifyPostsList(HttpSession httpSession){
+		ModelAndView mv=new ModelAndView("admin/verify-posts-list");
+		mv.addObject("latestUsers",repository.listLatestUsers());
+		mv.addObject("blockedUsers",repository.listBlockedUsers());
+		mv.addObject("posts",repository.listPostsForAdmin());
 		return mv;
 	}
 

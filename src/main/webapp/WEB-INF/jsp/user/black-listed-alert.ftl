@@ -33,6 +33,7 @@ Released   : 20140101
 			<ul>
 				<li><a href="/" accesskey="1" title="">Post Something</a></li>
 				<li class="active"><a href="#" accesskey="1" title="">View Posts </a></li>
+				<li><a href="/logout" accesskey="1" title="">Logout </a></li>
 				
 			</ul>
 		</div>

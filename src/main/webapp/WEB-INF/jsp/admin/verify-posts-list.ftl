@@ -181,8 +181,8 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="/admin/charts/blocked"><i class="fa fa-angle-double-right"></i>Filter Words</a></li>
-                                <li><a href="/admin/charts/blacklists"><i class="fa fa-angle-double-right"></i>Blacklist</a></li>                                
+                                <li><a href="/admin/grapth-data-words"><i class="fa fa-angle-double-right"></i>Filter Words</a></li>
+                                <li><a href="/admin/grapth-data-black-list"><i class="fa fa-angle-double-right"></i>Blacklist</a></li>                                
                             </ul>
                         </li>                                             
                     </ul>
@@ -214,7 +214,7 @@
                             <div class="small-box bg-aqua">
                                 <div class="inner">
                                     <h3>
-                                        ${users?size}
+                                        ${blockedUsers?size}
                                     </h3>
                                     <p>
                                         Blocked Users
@@ -261,7 +261,7 @@
                                 <div class="icon">
                                     <i class="ion ion-person-add"></i>
                                 </div>
-                                <a href="/admin/latest-users-list" class="small-box-footer">
+                                <a href="#" class="small-box-footer">
                                     More info <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -302,13 +302,13 @@
                             <div class="box box-primary">
                                 <div class="box-header">
                                     <i class="ion ion-clipboard"></i>
-                                    <h3 class="box-title">User Black List</h3>
+                                    <h3 class="box-title">Posts</h3>
                                     <div class="box-tools pull-right">                                        
                                     </div>
                                 </div><!-- /.box-header -->
                                 <div class="box-body">
                                     <ul class="todo-list">
-                                      <#list users as user>
+                                      <#list posts as post>
                                         <li>
                                             <!-- drag handle -->
                                             <span class="handle">
@@ -316,13 +316,26 @@
                                                 <i class="fa fa-ellipsis-v"></i>
                                             </span>                                                                                   
                                             <!-- todo text -->
-                                            <span class="text">${user.id}</span>
-                                            <span class="text" style="margin-left: 40px;">${user.name}</span>
-                                            <span class="text" style="margin-left: 40px;">${user.status}</span>                                            
+                                            <span class="text">${post.id}</span>
+                                            <span class="text" style="margin-left: 40px;">${post.postText}</span>
+                                            <span class="text" style="margin-left: 40px;">${post.status}</span>  
+                                            <div>
+                                            <#if post.fileAttachment.fileType=="IMAGE">
+						<img src="/file-view?id=${post.fileAttachment.id}" style="max-width: 500px"/>
+					</#if>
+					<#if post.fileAttachment.fileType=="VIDEO">
+						<video style="max-width: 500px" controls>
+						<source src="/file-view?id=${post.fileAttachment.id}" type="video/mp4">
+						</video>
+					</#if>
+					<#if post.fileAttachment.fileType=="OTHER">
+						<a href="/file-view?id=${post.fileAttachment.id}">Download File</a>
+					</#if>	
+                                            </div>                                          
                                             <!-- General tools such as edit or delete-->
                                             <div class="tools">
-                                                <#if user.status!="ACTIVE"><a href="/admin/activate-user?id=${user.id}"><i class="fa fa-edit"></i></a></#if>
-                                                <a href="/admin/delete-user?id=${user.id}"><i class="fa fa-trash-o"></i></a>
+                                                <a href="/verify-post?id=${post.id}&type=admin"><i class="fa fa-edit"></i></a>
+                                                <a href="/remove-post?id=${post.id}&type=admin"><i class="fa fa-trash-o"></i></a>
                                             </div>
                                         </li>     
                                         </#list>                                  

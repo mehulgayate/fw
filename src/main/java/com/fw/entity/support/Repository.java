@@ -9,11 +9,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fw.entity.FileAttachment;
 import com.fw.entity.GraphData;
 import com.fw.entity.GraphData.GraphType;
 import com.fw.entity.Post;
 import com.fw.entity.User;
 import com.fw.entity.User.Status;
+import com.fw.web.AdminController;
 import com.fw.web.support.DateTimeUtil;
 
 @Transactional
@@ -43,6 +45,24 @@ public class Repository {
 				.setParameter("id", id)
 				.uniqueResult();
 	}
+	
+	public Post findPostById(Long id){
+		return (Post) getSession().createQuery("FROM "+Post.class.getName()+" where id=:id")
+				.setParameter("id", id)
+				.uniqueResult();
+	}
+	
+	public FileAttachment findFileAttachmentById(Long id){
+		return (FileAttachment) getSession().createQuery("FROM "+FileAttachment.class.getName()+" where id=:id")
+				.setParameter("id", id)
+				.uniqueResult();
+	}
+	
+	public List<User> listUsersByName(String name){
+		return getSession().createQuery("FROM "+User.class.getName()+" where name=:name")
+				.setParameter("name", name)
+				.list();
+	}
 
 	public List<User> listUsers(){
 		return  getSession().createQuery("FROM "+User.class.getName())				
@@ -68,8 +88,16 @@ public class Repository {
 	}
 
 	public List<Post> listPostsByUser(User user){
-		return getSession().createQuery("FROM "+Post.class.getName()+" p where p.user=:user")
+		return getSession().createQuery("FROM "+Post.class.getName()+" p where p.user=:user AND p.status!=:status")
 				.setParameter("user", user)
+				.setParameter("status", com.fw.entity.Post.Status.ADMIN_VERIFICATION)
+				.list();
+	}
+	
+	
+	public List<Post> listPostsForAdmin(){
+		return getSession().createQuery("FROM "+Post.class.getName()+" p where p.status=:status")				
+				.setParameter("status", com.fw.entity.Post.Status.ADMIN_VERIFICATION)
 				.list();
 	}
 

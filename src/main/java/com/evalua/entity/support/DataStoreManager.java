@@ -18,5 +18,11 @@ public class DataStoreManager {
 		session.saveOrUpdate(entity);
 		session.flush();
 	}
+	
+	public void delete(EntityBase entity){		
+		Session session=sessionFactory.getCurrentSession();
+		session.delete(entity);
+		session.flush();
+	}
 
 }

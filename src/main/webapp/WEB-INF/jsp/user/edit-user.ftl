@@ -21,28 +21,7 @@ Released   : 20140101
 <link href="/static/user/fonts.css" rel="stylesheet" type="text/css" media="all" />
 
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-<script type="text/javascript"">
-	$(function() {
-		$('#fileAttachment').bind('change', function() {
 
-			  //this.files[0].size gets the size of your file.
-			  if(this.files[0].size > 5000000){
-				  alert("File size is more than % MB, please select another file")
-			  }
-
-			});
-		
-		$("#postButton").click(function(){
-			if(document.getElementById('fileAttachment').files[0].size > 5000000){
-				  alert("File size is more than % MB, please select another file")
-			  }else{
-				  $("#postForm").submit();
-			  }
-		})
-		});
-
-</script>
 </head>
 <body>
 <div id="header-wrapper">
@@ -52,48 +31,68 @@ Released   : 20140101
 		</div>
 		<div id="menu">
 			<ul>
-				<li class="active"><a href="#" accesskey="1" title="">Post Something</a></li>
+				<li><a href="/" accesskey="1" title="">Post Something</a></li>
 				<li><a href="/posts" accesskey="1" title="">View Posts </a></li>
 				<li><a href="/logout" accesskey="1" title="">Logout </a></li>
-				<li>Welcome <a href="/edit-user?id=${Session.user.id}"><b>${Session.user.name}</b></a></li>
+				<li class="active">Welcome <a href="/edit-user?id=${Session.user.id}"><b>${Session.user.name}</b></a></li>
 				
 			</ul>
 		</div>
 	</div>
 	<div id="banner" class="container">
 		<div>
-			<form action="/new-post" method="post" enctype="multipart/form-data" id="postForm">
-				<div style="display:block; width: 500px; background: white; margin: 0 auto; padding: 30px; opacity: 0.6;">
+			<form action="/save-user" method="post">
+				<div style="display:block; width: 650px; background: white; margin: 0 auto; padding: 30px; opacity: 0.6;">
 					<div style="display: block;">
-						<div style="display: inline-block; width: 120px;">
-							<strong>Write Post :</strong>
+						<div style="display: inline-block; width: 300px;">
+							<strong>Name :</strong>
 						</div>
 						<div style="display: inline-block;">
-							<textarea rows="10" cols="35" name="postText" style="color: red; font-size: 16px;"></textarea>
+							<input type="text" name="name" style="width: 300px;font-size: 16px; color: red;" value="${Session.user.name?if_exists}"/>
 						</div>
 					</div>
 					<div style="padding-top: 10px;">
-						<div style="display: inline-block; width: 120px;">
-							<strong>Image / Video :</strong>
+						<div style="display: inline-block; width: 300px;">
+							<strong>Email :</strong>
 						</div>
 						<div style="display: inline-block;">
-							<input type="file" name="file" id="fileAttachment"/>
+							${Session.user.email?if_exists}
+							<input type="hidden" name="email" style="width: 300px;font-size: 16px; color: red;" value="${Session.user.email?if_exists}"/>
 						</div>
 					</div>
 					<div style="padding-top: 10px;">
-						<div style="display: inline-block; width: 120px;">
-							<strong>Tag Users :</strong>
+						<div style="display: inline-block; width: 300px;">
+							<strong>Address :</strong>
 						</div>
 						<div style="display: inline-block;">
-							<input type="text" name="tags" style="width: 360px;font-size: 16px; color: red;" placeholder="type user names seperated by commas"/>
+							<input type="text" name="address" style="width: 300px;font-size: 16px; color: red;" value="${Session.user.address?if_exists}"/>
 						</div>
 					</div>
+					<div style="padding-top: 10px;">
+						<div style="display: inline-block; width: 300px;">
+							<strong>Phone :</strong>
+						</div>
+						<div style="display: inline-block;">
+							<input type="text" name="phone" style="width: 300px;font-size: 16px; color: red;" value="${Session.user.phone?if_exists}"/>
+						</div>
+					</div>
+					<div style="padding-top: 10px;">
+						<div style="display: inline-block; width: 300px;">
+							<strong>Non Filtered Posts Allowed? :</strong>
+						</div>
+						<div style="display: inline-block;">
+							<select name="validationStatus">
+								<option value="ALLOW">Yes</option>
+								<option value="BAN" <#if Session.user.validationStatus?has_content && Session.user.validationStatus == "BAN">selected</#if>>No</option>
+							</select>
+						</div>
+					</div>					
 					<div style=" padding-top: 10px; ">
-						<div style="display: inline-block; width: 120px;">
+						<div style="display: inline-block; width: 300px;">
 							<strong></strong>
 						</div>
 						<div style="display: inline-block;">
-							<input type="button" value="Post" id="postButton"/>
+							<input type="submit" value="Save"/>
 						</div>
 					</div>
 				</div>
