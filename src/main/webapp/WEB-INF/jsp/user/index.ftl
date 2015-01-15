@@ -28,14 +28,14 @@ Released   : 20140101
 
 			  //this.files[0].size gets the size of your file.
 			  if(this.files[0].size > 5000000){
-				  alert("File size is more than % MB, please select another file")
+				  alert("File size is more than 5 MB, please select another file")
 			  }
 
 			});
 		
 		$("#postButton").click(function(){
-			if(document.getElementById('fileAttachment').files[0].size > 5000000){
-				  alert("File size is more than % MB, please select another file")
+			if(document.getElementById('fileAttachment').files[0]!= undefined && document.getElementById('fileAttachment').files[0].size > 5000000){
+				  alert("File size is more than 5 MB, please select another file")
 			  }else{
 				  $("#postForm").submit();
 			  }
