@@ -28,8 +28,7 @@ body{
 	right: -40px;
 	bottom: -40px;
 	width: auto;
-	height: auto;
-	background-image: url(http://ginva.com/wp-content/uploads/2012/07/city-skyline-wallpapers-008.jpg);
+	height: auto;	
 	background-size: cover;
 	-webkit-filter: blur(5px);
 	z-index: 0;
@@ -149,7 +148,7 @@ body{
    color: rgba(255,255,255,0.6);
 }
 </style>
-
+<link href="/static/common.css" rel="stylesheet" type="text/css" />
     <script src="/static/login/js/prefixfree.min.js"></script>
 
 </head>
