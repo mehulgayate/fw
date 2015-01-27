@@ -88,7 +88,7 @@ public class Repository {
 	}
 
 	public List<Post> listPostsByUser(User user){
-		return getSession().createQuery("FROM "+Post.class.getName()+" p where p.user=:user AND p.status!=:status")
+		return getSession().createQuery("FROM "+Post.class.getName()+" p where p.user=:user AND p.status!=:status order by id desc")
 				.setParameter("user", user)
 				.setParameter("status", com.fw.entity.Post.Status.ADMIN_VERIFICATION)
 				.list();
@@ -96,7 +96,7 @@ public class Repository {
 	
 	
 	public List<Post> listPostsForAdmin(){
-		return getSession().createQuery("FROM "+Post.class.getName()+" p where p.status=:status")				
+		return getSession().createQuery("FROM "+Post.class.getName()+" p where p.status=:status order by id desc")				
 				.setParameter("status", com.fw.entity.Post.Status.ADMIN_VERIFICATION)
 				.list();
 	}
