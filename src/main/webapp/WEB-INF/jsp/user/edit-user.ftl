@@ -86,7 +86,15 @@ Released   : 20140101
 								<option value="BAN" <#if Session.user.validationStatus?has_content && Session.user.validationStatus == "BAN">selected</#if>>No</option>
 							</select>
 						</div>
-					</div>					
+					</div>	
+					<div style="padding-top: 10px;">
+						<div style="display: inline-block; width: 300px;">
+							<strong>Blocked words :</strong>
+						</div>
+						<div style="display: inline-block;">
+							<input type="text" name="blockWords" style="width: 300px;font-size: 16px; color: red;" value="${Session.user.blockWords?if_exists}"/>
+						</div>
+					</div>				
 					<div style=" padding-top: 10px; ">
 						<div style="display: inline-block; width: 300px;">
 							<strong></strong>

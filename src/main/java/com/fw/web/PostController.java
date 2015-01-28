@@ -110,7 +110,7 @@ public class PostController {
 			return new ModelAndView("redirect:/black-listed-alert");
 		}
 		
-		Status status=postService.processPost(post);
+		Status status=postService.processPost(post, user);
 		post.setStatus(status);
 		
 		FileAttachment fileAttachment =null;
@@ -193,6 +193,10 @@ public class PostController {
 					postForUser.setUser(taggedUser);
 					postForUser.setFileAttachment(fileAttachment);
 
+					Status newStatus=postService.processPost(postForUser, taggedUser);
+					if(newStatus.equals(Post.Status.BANNED)){
+						postForUser.setStatus(status);
+					}
 					dataStoreManager.save(postForUser);
 				}
 			}

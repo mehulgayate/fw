@@ -1,5 +1,7 @@
 package com.fw.web.support;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -15,11 +17,11 @@ import com.fw.entity.Post.Status;
 import com.fw.entity.support.Repository;
 
 public class PostService {
-	
+
 	private Repository repository;
 	private DataStoreManager dataStoreManager;
 	private PostConfiguration postConfiguration;
-	
+
 	public void setPostConfiguration(PostConfiguration postConfiguration) {
 		this.postConfiguration = postConfiguration;
 	}
@@ -29,11 +31,18 @@ public class PostService {
 	public void setDataStoreManager(DataStoreManager dataStoreManager) {
 		this.dataStoreManager = dataStoreManager;
 	}
-	
-	
-	public Status processPost(Post post){
+
+
+	public Status processPost(Post post, User user){
+
+		List<String> bannedWords = new ArrayList<String>();
 		
-		for (String word : postConfiguration.getBannedWords()) {
+		if(StringUtils.isNotBlank(user.getBlockWords())){
+			String[] words = user.getBlockWords().split(",");		
+			bannedWords=Arrays.asList(words);
+		}
+
+		for (String word : bannedWords) {
 			if(StringUtils.contains(post.getPostText().toLowerCase(), word)){
 				GraphData graphData=repository.findGraphData(new Date(), GraphType.WORDS);
 				if(graphData==null){
@@ -46,7 +55,7 @@ public class PostService {
 				return Status.BANNED;
 			}
 		}	
-		
+
 		String[] wordsInPost =post.getPostText().split(" ");
 		System.out.println("**** Total words "+wordsInPost.length);
 		int capitalWordsCount=0;
@@ -62,9 +71,9 @@ public class PostService {
 				capitalWordsCount++;
 			}			
 		}
-		
+
 		System.out.println("**** Total Capital words "+capitalWordsCount);
-		
+
 		if(capitalWordsCount > (wordsInPost.length / 2)){
 			GraphData graphData=repository.findGraphData(new Date(), GraphType.WORDS);
 			if(graphData==null){
@@ -73,10 +82,10 @@ public class PostService {
 			}
 			graphData.setCount(graphData.getCount()+1);
 			dataStoreManager.save(graphData);
-			
+
 			return Status.BANNED;
 		}		
-		
+
 		return Status.VALID;
 	}
 

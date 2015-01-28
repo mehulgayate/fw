@@ -170,6 +170,7 @@ body{
 					<input type="password" placeholder="Password" name="password"><br>
 					<input type="text" placeholder="Address" name="address"><br>
 					<input type="text" placeholder="Phone" name="phone"><br>
+					<input type="text" placeholder="Words to be blocked with (,)" name="blockWords"><br>
 					<input type="submit" value="SignUp"><br>
 					
 			</div>

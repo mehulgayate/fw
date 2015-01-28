@@ -27,9 +27,15 @@ public class User extends EntityBase{
 	private Date date=new Date();
 	private PrivacyStatus validationStatus=PrivacyStatus.BAN;
 	
+	private String blockWords;
 	
 	
-	
+	public String getBlockWords() {
+		return blockWords;
+	}
+	public void setBlockWords(String blockWords) {
+		this.blockWords = blockWords;
+	}
 	public PrivacyStatus getValidationStatus() {
 		return validationStatus;
 	}
