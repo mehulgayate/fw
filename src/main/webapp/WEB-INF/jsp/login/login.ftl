@@ -82,7 +82,7 @@ body{
 	background: transparent;
 	border: 1px solid rgba(255,255,255,0.6);
 	border-radius: 2px;
-	color: #fff;
+	/*color: #fff;*/
 	font-family: 'Exo', sans-serif;
 	font-size: 16px;
 	font-weight: 400;
@@ -95,7 +95,7 @@ body{
 	background: transparent;
 	border: 1px solid rgba(255,255,255,0.6);
 	border-radius: 2px;
-	color: #fff;
+	/*color: #fff;*/
 	font-family: 'Exo', sans-serif;
 	font-size: 16px;
 	font-weight: 400;

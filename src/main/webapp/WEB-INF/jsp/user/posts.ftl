@@ -54,9 +54,11 @@ Released   : 20140101
 					Tagged By : ${post.taggedBy.name?if_exists}
 				</div>
 				</#if>
-				<#if post.status=="NOT_VERIFIED">
+				<#if post.status=="NOT_VERIFIED" || post.status=="BANNED">
 					<div style="display: inline-block; width: 180px; border-left: 2px solid; padding-left	: 2px;">
+						<#if post.status="NOT_VERIFIED">
 						<a href="/verify-post?id=${post.id}">Verify</a>
+						</#if>
 						<a href="/remove-post?id=${post.id}" style="padding-left: 20px;">Remove</a>
 					</div>
 				</#if>
