@@ -182,9 +182,7 @@ public class PostController {
 			for (String tag : tags) {
 				List<User> users =repository.listUsersByName(tag.trim());
 				for (User taggedUser : users) {
-					if(user.getValidationStatus().equals(PrivacyStatus.BAN) && post.getStatus().equals(Status.BANNED)){
-						continue;
-					}
+					
 					Post postForUser= new Post();
 					BeanUtils.copyProperties(post, postForUser, ignoreProperties);
 					postForUser.setOwnFeed(false);
@@ -195,7 +193,7 @@ public class PostController {
 
 					Status newStatus=postService.processPost(postForUser, taggedUser);
 					if(newStatus.equals(Post.Status.BANNED)){
-						postForUser.setStatus(status);
+						postForUser.setStatus(newStatus);
 					}
 					dataStoreManager.save(postForUser);
 				}
